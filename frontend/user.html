@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息页面</title>
+    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+
+    <div id="emp"></div>
+
+    <script type="text/javascript">
+        $.ajax({
+            url: "http://localhost:80/jd/user/getUserById",
+            type: "POST",
+            data: {
+                userId: 1001,
+                token:localStorage.getItem("token")
+            },
+            dataType: "json",
+            success:function (res) {
+                $("#emp").text(JSON.stringify(res));
+            },
+            error:function () {
+                console.log("error");
+            }
+        });
+    </script>
+</body>
+</html>

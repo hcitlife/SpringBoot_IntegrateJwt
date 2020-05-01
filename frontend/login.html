@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+
+</head>
+<body>
+    <form>
+        <input type="text" name="username" id="username" value="zhangsan"> <br>
+        <input type="text" name="password" id="password" value="123456"><br>
+        <input type="button" id="login" value="登录"/>
+    </form>
+    <div id="show"></div>
+
+    <script type="text/javascript">
+        $("#login").click(function () {
+            $.ajax({
+                url: "http://localhost:80/jd/user/login",
+                type: "POST",
+                data: {
+                    username: $("#username").val(),
+                    password: $("#password").val()
+                },
+                dataType: "json",
+                success: function (res) {
+                    localStorage.setItem("token",res.data.token);
+                    window.location.href="user.html";
+                },
+                error:function () {
+                    $("#show").html("error");
+                }
+            });
+        });
+    </script>
+
+    <a href="http://localhost:80/jd/user/getMsg">请求公共信息</a>
+</body>
+</html>

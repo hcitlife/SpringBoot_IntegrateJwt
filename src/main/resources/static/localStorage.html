@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>localStorage</title>
+</head>
+<body>
+    <script type="text/javascript">
+        //判断浏览器是否支持localstorage
+        if(window.localStorage){
+            console.info("浏览器支持localstorage");
+        }
+        //存数据
+        localStorage.setItem("name","zhangsan");
+        var data = {"id":1001,"name":"zhangsan","birth":"1999-09-21","score":90.5};
+        localStorage.setItem("info",JSON.stringify(data));//必须先将JSON对象转换成JSON字符串
+        localStorage.age=88
+        localStorage["id"]=1001
+        //取数据
+        let  name = localStorage.getItem("name");
+        console.info(name)
+        let age = localStorage.age;
+        console.info(age)
+        let id = localStorage["id"];
+        console.info(id)
+        let json = localStorage.getItem("info");
+        console.info(json)
+        console.info(JSON.parse(json).name)//必须先将JSON形式的字符串转换成JSON对象才能进行处理
+
+        //循环遍历所有数据
+        for(var i =0;i<localStorage.length;i++){
+            let key = localStorage.key(i);
+            let value = localStorage.getItem(key);
+            console.info(i+"\t"+ key+"\t"+value);
+        }
+
+        //判断数据类型
+        console.log(typeof  localStorage["info"])
+
+        //删除指定的key，
+        localStorage.removeItem("name");
+        console.info("name "+localStorage.getItem("name"))
+
+        //删除所有的信息
+        // localStorage.clear();
+        console.log(localStorage)
+    </script>
+</body>
+</html>
